@@ -22,7 +22,17 @@ Lista* criarNo(int lin, int col, int valor, Lista* l) {
     novo->coluna = col;
     novo->info = valor;
     novo->prox = NULL;
-    return novo;
+
+    if (l == NULL) {
+        return novo;
+    } else {
+        Lista* p = l;
+        while (p->prox != NULL) {
+            p = p->prox;
+        }
+        p->prox = novo;
+        return l;
+    }
 }
 
 Esparsa* criarMatriz(int lin, int col) {
@@ -40,10 +50,11 @@ Esparsa* preencheMatriz(Esparsa* mat, int lin, int col) {
 
     for (int i = 0; i < lin; i++) {
         for (int j = 0; j < col; j++) {
-            printf("Digite o valor da posicao [%d][%d]: ");
+            printf("Digite o valor da posicao [%d][%d]: ", i, j);
             scanf("%d", &valor);
-
-            lis = criarNo(i, j, valor, lis);
+            if (valor != 0) {
+                lis = criarNo(i, j, valor, lis);
+            }   
         }
     }
 
@@ -59,9 +70,11 @@ void imprimeMatriz(Esparsa* mat, int lin, int col) {
     printf("Impressao matriz:\n");
     for (int i = 0; i < lin; i++) {
         for (int j = 0; j < col; j++) {
-            if (p->linha == i && p->coluna == j) {
-                printf("%d  ", p->info);
-                p = p->prox;
+            if (p!= NULL){
+                if (p->linha == i && p->coluna == j) {
+                    printf("%d  ", p->info);
+                    p = p->prox;
+                }
             } else {
                 printf("0  ");
             }
