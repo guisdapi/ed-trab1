@@ -16,7 +16,11 @@ struct esparsa {
 };
 typedef struct esparsa Esparsa;
 
+
+
 int main() {
+
+    Esparsa* mat = criarMatriz();
 
     return 0;
 }
