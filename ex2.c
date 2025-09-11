@@ -77,7 +77,7 @@ void imprimeMatriz(Esparsa* mat) {
     printf("Impressao matriz:\n");
     for (int i = 0; i < mat->linhas; i++) {
         for (int j = 0; j < mat->colunas; j++) {
-            if (p!= NULL){
+            if (p != NULL){
                 if (p->linha == i && p->coluna == j) {
                     printf("%d  ", p->info);
                     p = p->prox;
