@@ -79,7 +79,7 @@ int main() {
     scanf("%d", &col);
 
     Esparsa* mat = criarMatriz(lin, col);
-    Esparsa* mat = preencheMatriz(mat, lin, col);
+    mat = preencheMatriz(mat, lin, col);
     imprimeMatriz(mat, lin, col);
 
     return 0;
