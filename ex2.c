@@ -35,7 +35,14 @@ Lista* criarNo(int lin, int col, int valor, Lista* l) {
     }
 }
 
-Esparsa* criarMatriz(int lin, int col) {
+Esparsa* criarMatriz() {
+
+    int lin, col;
+    printf("Digite o numero de linhas: ");
+    scanf("%d", &lin);
+    printf("Digite o numero de colunas: ");
+    scanf("%d", &col);
+
     Esparsa* mat = (Esparsa*) malloc(sizeof(Esparsa));
     mat->linhas = lin;
     mat->colunas = col;
@@ -44,12 +51,12 @@ Esparsa* criarMatriz(int lin, int col) {
     return mat;
 }
 
-Esparsa* preencheMatriz(Esparsa* mat, int lin, int col) {
+Esparsa* preencheMatriz(Esparsa* mat) {
     int valor;
     Lista* lis = NULL;
 
-    for (int i = 0; i < lin; i++) {
-        for (int j = 0; j < col; j++) {
+    for (int i = 0; i < mat->linhas; i++) {
+        for (int j = 0; j < mat->colunas; j++) {
             printf("Digite o valor da posicao [%d][%d]: ", i, j);
             scanf("%d", &valor);
             if (valor != 0) {
@@ -63,13 +70,13 @@ Esparsa* preencheMatriz(Esparsa* mat, int lin, int col) {
     return mat;
 }
 
-void imprimeMatriz(Esparsa* mat, int lin, int col) {
+void imprimeMatriz(Esparsa* mat) {
 
     Lista* p = mat->prim;
 
     printf("Impressao matriz:\n");
-    for (int i = 0; i < lin; i++) {
-        for (int j = 0; j < col; j++) {
+    for (int i = 0; i < mat->linhas; i++) {
+        for (int j = 0; j < mat->colunas; j++) {
             if (p!= NULL){
                 if (p->linha == i && p->coluna == j) {
                     printf("%d  ", p->info);
@@ -81,19 +88,43 @@ void imprimeMatriz(Esparsa* mat, int lin, int col) {
         }
         printf("\n");
     }
+    printf("\n");
+}
+
+void consultaMatriz(Esparsa* mat) {
+    int linCons, colCons;
+    printf("Digite a linha da matriz para consultar: ");
+    scanf("%d", &linCons);
+    printf("Digite a coluna da matriz para consultar: ");
+    scanf("%d", &colCons);
+
+    Lista* p = mat->prim;
+    while (p!=NULL) {
+        if (p->linha == linCons && p->coluna == colCons) {
+            printf("Valor na posicao [%d][%d]: %d\n", linCons, colCons, p->info);
+            return;
+        }
+        p=p->prox;
+    }
+    printf("Posicao fora do escopo da matriz...\n");
+}
+
+void imprimeSomatorio(Esparsa* mat) {
+
+}
+
+void percentualNaoNulos(Esparsa* mat) {
+
 }
 
 int main() {
 
-    int lin, col;
-    printf("Digite o numero de linhas: ");
-    scanf("%d", &lin);
-    printf("Digite o numero de colunas: ");
-    scanf("%d", &col);
-
-    Esparsa* mat = criarMatriz(lin, col);
-    mat = preencheMatriz(mat, lin, col);
-    imprimeMatriz(mat, lin, col);
+    Esparsa* mat = criarMatriz();
+    mat = preencheMatriz(mat);
+    imprimeMatriz(mat);
+    consultaMatriz(mat);
+    imprimeSomatorio(mat);
+    percentualNaoNulos(mat);
 
     return 0;
 }
