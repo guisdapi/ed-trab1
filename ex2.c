@@ -113,7 +113,20 @@ void consultaMatriz(Esparsa* mat) {
 }
 
 void imprimeSomatorio(Esparsa* mat) {
-
+    int input_i, soma = 0;
+    printf("Impressão de somatório de uma linha.\n");
+    do{
+        printf("Informe uma linha i: \n");
+        scanf("%d", &input_i);
+        if(input_i > mat->linhas || input_i < 0)
+            printf("Linha inválida\n");
+    }while(input_i > mat->linhas || input_i < 0);
+    
+    for(Lista* p = mat->prim; p != NULL; p = p->prox){
+        if(p->linha == input_i)
+            soma += p->info;
+    }
+    printf("Somatório da linha %d: %d\n", input_i, soma);
 }
 
 void percentualNaoNulos(Esparsa* mat) {
@@ -128,6 +141,5 @@ int main() {
     consultaMatriz(mat);
     imprimeSomatorio(mat);
     percentualNaoNulos(mat);
-
     return 0;
 }
