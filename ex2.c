@@ -72,7 +72,6 @@ Esparsa* preencheMatriz(Esparsa* mat) {
 
 void imprimeMatriz(Esparsa* mat) {
     Lista* p = mat->prim;
-    //Mudei um pouco aqui por que o p != NULL não funcionava muito bem
     printf("Impressao matriz:\n");
     for (int i = 0; i < mat->linhas; i++) {
         for (int j = 0; j < mat->colunas; j++) {
@@ -130,7 +129,13 @@ void imprimeSomatorio(Esparsa* mat) {
 }
 
 void percentualNaoNulos(Esparsa* mat) {
-
+    float percentual_naoNulos;
+    int elementos_totais = mat->linhas * mat->colunas;
+    int elementos_naoNulos = 0;
+    for(Lista* p = mat->prim; p != NULL; p = p->prox)
+        elementos_naoNulos++;
+    percentual_naoNulos = 100.0 * elementos_naoNulos / elementos_totais;
+    printf("O percentual de elementos não nulos na matriz é: %.2f\n", percentual_naoNulos);
 }
 
 int main() {
