@@ -72,11 +72,11 @@ Esparsa* preencheMatriz(Esparsa* mat) {
 
 void imprimeMatriz(Esparsa* mat) {
     Lista* p = mat->prim;
-    //Mudei um pouco aqui por que o p != NULL não funcionava
+    //Mudei um pouco aqui por que o p != NULL não funcionava muito bem
     printf("Impressao matriz:\n");
     for (int i = 0; i < mat->linhas; i++) {
         for (int j = 0; j < mat->colunas; j++) {
-            if(p->linha == i && p->coluna == j){
+            if(p != NULL && p->linha == i && p->coluna == j){
                 printf("%3d", p->info);
                 p = p->prox;
             }
@@ -96,15 +96,22 @@ void consultaMatriz(Esparsa* mat) {
     printf("Digite a coluna da matriz para consultar: ");
     scanf("%d", &colCons);
 
+    if(mat->linhas > linCons || mat->colunas > colCons){
+        printf("Posição fora do escopo da matriz...\n");
+        return;
+    }
+
     Lista* p = mat->prim;
     while (p!=NULL) {
         if (p->linha == linCons && p->coluna == colCons) {
             printf("Valor na posicao [%d][%d]: %d\n", linCons, colCons, p->info);
             return;
         }
+        else{
+            printf("Valor na posição [%d][%d]: %d\n", linCons, colCons, 0);
+        }
         p=p->prox;
     }
-    printf("Posicao fora do escopo da matriz...\n");
 }
 
 void imprimeSomatorio(Esparsa* mat) {
