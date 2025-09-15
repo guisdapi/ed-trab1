@@ -96,7 +96,7 @@ void consultaMatriz(Esparsa* mat) {
     printf("Digite a coluna da matriz para consultar: ");
     scanf("%d", &colCons);
 
-    if(mat->linhas > linCons || mat->colunas > colCons){
+    if(mat->linhas < linCons || mat->colunas < colCons){
         printf("Posição fora do escopo da matriz...\n");
         return;
     }
@@ -107,11 +107,9 @@ void consultaMatriz(Esparsa* mat) {
             printf("Valor na posicao [%d][%d]: %d\n", linCons, colCons, p->info);
             return;
         }
-        else{
-            printf("Valor na posição [%d][%d]: %d\n", linCons, colCons, 0);
-        }
         p=p->prox;
     }
+    printf("Valor na posição [%d][%d]: %d\n", linCons, colCons, 0);
 }
 
 void imprimeSomatorio(Esparsa* mat) {
