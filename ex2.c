@@ -71,19 +71,17 @@ Esparsa* preencheMatriz(Esparsa* mat) {
 }
 
 void imprimeMatriz(Esparsa* mat) {
-
     Lista* p = mat->prim;
-
+    //Mudei um pouco aqui por que o p != NULL não funcionava
     printf("Impressao matriz:\n");
     for (int i = 0; i < mat->linhas; i++) {
         for (int j = 0; j < mat->colunas; j++) {
-            if (p != NULL){
-                if (p->linha == i && p->coluna == j) {
-                    printf("%d  ", p->info);
-                    p = p->prox;
-                }
-            } else {
-                printf("0  ");
+            if(p->linha == i && p->coluna == j){
+                printf("%3d", p->info);
+                p = p->prox;
+            }
+            else{
+                printf("%3d", 0);
             }
         }
         printf("\n");
