@@ -29,35 +29,36 @@ Diagonal* preenchimento_matriz(Diagonal* matriz){
     return matriz;
 }
 
-//ta muito feio a saida
 void print_matriz(Diagonal* matriz){
     for(int i = 0; i < matriz->ordem; i++){
         for(int j = 0; j < matriz->ordem; j++){
             if(i == j)
-                printf("%d ", matriz->v[i]);
+                printf("%3d ", matriz->v[i]);
             else
-                printf("0 ");
+                printf("%3d ", 0);
         }
         printf("\n");
     }
 }
 
-//Arrumar isso, se por uma coordenada fora da matriz ele retorna 0, o que está errado
-int consulta_elemento(Diagonal* matriz, int i, int j){
-    if(i == j)
-        return matriz->v[i];
+void consulta_elemento(Diagonal* matriz){
+    int input_i, input_j;
+    printf("Qual posição da matriz deseja consultar? \n");
+    scanf("%d %d", &input_i, &input_j);
+    if(input_i > matriz->ordem || input_j > matriz->ordem){
+        printf("Coordenada fora da matriz\n");
+        return;
+    }
+    if(input_i == input_j)
+        printf("Valor nessa posição: %d\n", matriz->v[input_i]);
     else
-        return 0;
+        printf("Valor nessa posição: 0\n");
 }
 
 int main() {
-    int input_i, input_j, elemento;
     Diagonal* matrizDiagonal = criarMatriz();
     matrizDiagonal = preenchimento_matriz(matrizDiagonal);
     print_matriz(matrizDiagonal);
-    printf("Qual posição da matriz deseja consultar? \n");
-    scanf("%d %d", &input_i, &input_j);
-    elemento = consulta_elemento(matrizDiagonal, input_i, input_j);
-    printf("Elemento nessa coordenada: %d\n", elemento);
+    consulta_elemento(matrizDiagonal);
     return 0;
 }
