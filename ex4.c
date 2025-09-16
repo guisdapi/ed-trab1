@@ -23,7 +23,7 @@ void preenche_matriz (int m, int n, int z, int ***mat) {
         for (int j = 0; j < m; j++) {
             for (int k = 0; k < n; k++) {
                 printf("Posicao [%d][%d]: ", j, k);
-                scanf("%d", &mat[j][k][z]);
+                scanf("%d", &mat[j][k][i]);
             }
         }
     }
@@ -34,7 +34,7 @@ void imprime_matriz (int m, int n, int z, int ***mat) {
         printf("Camada/Profundidade %d:\n", i);
         for (int j = 0; j < m; j++) {
             for (int k = 0; k < n; k++) {
-                printf("Posicao [%d][%d]:%d  ", j, k, mat[j][k][z]);
+                printf("Posicao [%d][%d]:%d  ", j, k, mat[j][k][i]);
             }
             printf("\n");
         }
@@ -44,7 +44,14 @@ void imprime_matriz (int m, int n, int z, int ***mat) {
 
 
 int main() {
-    int m = 2, n = 2, z = 2;
+    int m, n, z;
+    printf("Digite o tamanho da dimensao m: ");
+    scanf("%d", &m);
+    printf("Digite o tamanho da dimensao n: ");
+    scanf("%d", &n);
+    printf("Digite o tamanho da dimensao z: ");
+    scanf("%d", &z);
+
     int ***mat = aloca_matriz(m, n, z);
     preenche_matriz(m, n, z, mat);
     imprime_matriz(m, n, z, mat);
