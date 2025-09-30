@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 
 typedef struct Lista{
@@ -80,10 +81,32 @@ void imprimeMatriz(Identidade* mat) {
 
 void elementos_violantes(Identidade* mat){
     printf("Elementos que violam a propriedade de identidade: \n");
-    for(Lista* p = mat->prim; p != NULL; p = p->prox){
-        if(p->info != 1 || p->linha != p->coluna){
-            printf("elemento [%d][%d]: %d\n", 
-                p->linha, p->coluna, p->info);
+
+    int ordem = mat->ordem;
+    bool diagonal[ordem];
+    for (int i = 0; i < ordem; i++) {
+        diagonal[i] = false;
+    }
+
+    for (Lista* p = mat->prim; p != NULL; p = p->prox) {
+        if (p->linha == p->coluna) {
+            if (p->info == 1) {
+                if (p->linha < ordem) {
+                    diagonal[p->linha] = true;
+                }
+            }
+            else {
+                printf("Posicao [%d][%d] deveria ser 1, mas eh %d.\n", p->linha, p->coluna, p->info);
+            }
+        }
+        else {
+            printf("Posicao [%d][%d] com valor %d viola matriz identidade.\n", p->linha, p->coluna, p->info);
+        }
+    }
+    printf("\n");
+    for (int i = 0; i < mat->ordem; i++) {
+        if (diagonal[i] == false) {
+            printf("Posicao [%d][%d] deveria ser 1.\n", i, i);
         }
     }
 }

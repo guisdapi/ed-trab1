@@ -9,7 +9,13 @@ int*** aloca_matriz (int m, int n, int z) {
 
     for (int i = 0; i < m; i++) {
         matriz[i] = (int**) malloc(n*sizeof(int*));
+        if (matriz[i] == NULL) {
+            return NULL;
+        }
         for (int j = 0; j < n; j++) {
+            if (matriz[i][j] == NULL) {
+                return NULL;
+            }
             matriz[i][j] = (int*) malloc(z*sizeof(int));
         }
     }
@@ -40,6 +46,21 @@ void imprime_matriz (int m, int n, int z, int ***mat) {
         }
         printf("\n");
     }
+}
+
+void libera_matriz (int m, int n, int ***mat) {
+
+    if (mat == NULL) {
+        return;
+    }
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            free(mat[i][j]);
+        }
+        free(mat[i]);
+    }
+    free(mat);
 }
 
 
