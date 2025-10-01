@@ -49,7 +49,6 @@ void imprime_matriz (int m, int n, int z, int ***mat) {
 }
 
 void libera_matriz (int m, int n, int ***mat) {
-
     if (mat == NULL) {
         return;
     }
@@ -76,5 +75,6 @@ int main() {
     int ***mat = aloca_matriz(m, n, z);
     preenche_matriz(m, n, z, mat);
     imprime_matriz(m, n, z, mat);
+    libera_matriz(m, n, mat);
     return 0;
 }

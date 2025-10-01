@@ -6,6 +6,11 @@ typedef struct Diagonal {
     int* v; //o tamanho do vetor é igual a ordem da matriz. Os elementos da diagonal principal são armazenados neste vetor 
 }Diagonal; 
 
+void libera_matriz(Diagonal* matriz){
+    free(matriz->v);
+    free(matriz);
+}
+
 Diagonal* criarMatriz() {
     int ordem;
     printf("Qual a ordem?");
@@ -60,5 +65,6 @@ int main() {
     matrizDiagonal = preenchimento_matriz(matrizDiagonal);
     print_matriz(matrizDiagonal);
     consulta_elemento(matrizDiagonal);
+    libera_matriz(matrizDiagonal);
     return 0;
 }

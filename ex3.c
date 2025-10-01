@@ -14,6 +14,16 @@ typedef struct Identidade{
     struct Lista* prim;
 }Identidade;
 
+void libera_matriz(Identidade* matriz){
+    Lista* p = matriz->prim;
+    while(p != NULL){
+        Lista* temp = p;
+        p = p->prox;
+        free(temp);
+    }
+    free(matriz);
+}
+
 Identidade* cria_matriz(){
     int input_ordem;
     do{
@@ -117,5 +127,6 @@ int main() {
     matriz = preenche_matriz(matriz);
     imprimeMatriz(matriz);
     elementos_violantes(matriz);
+    libera_matriz(matriz);
     return 0;
 }
