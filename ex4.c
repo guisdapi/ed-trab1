@@ -13,10 +13,10 @@ int*** aloca_matriz (int m, int n, int z) {
             return NULL;
         }
         for (int j = 0; j < n; j++) {
+            matriz[i][j] = (int*) malloc(z*sizeof(int));
             if (matriz[i][j] == NULL) {
                 return NULL;
             }
-            matriz[i][j] = (int*) malloc(z*sizeof(int));
         }
     }
 
