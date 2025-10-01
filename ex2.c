@@ -16,6 +16,16 @@ struct esparsa {
 };
 typedef struct esparsa Esparsa;
 
+void libera_matriz(Esparsa* matriz){
+    Lista* p = matriz->prim;
+    while(p != NULL){
+        Lista* temp = p;
+        p = p->prox;
+        free(temp);
+    }
+    free(matriz);
+}
+
 Lista* criarNo(int lin, int col, int valor, Lista* l) {
     Lista* novo = (Lista*) malloc(sizeof(Lista));
     novo->linha = lin;
@@ -139,12 +149,12 @@ void percentualNaoNulos(Esparsa* mat) {
 }
 
 int main() {
-
     Esparsa* mat = criarMatriz();
     mat = preencheMatriz(mat);
     imprimeMatriz(mat);
     consultaMatriz(mat);
     imprimeSomatorio(mat);
     percentualNaoNulos(mat);
+    libera_matriz(mat);
     return 0;
 }
